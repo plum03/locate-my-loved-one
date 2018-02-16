@@ -11,7 +11,8 @@ import InfoForm from './InfoForm'
 import Search from './Search'
 import Login from './Login'
 import SignUp from './SignUp'
-import AuthForm from './AuthForm' // What is this, how is it different from Login/SignUp?
+// import AuthForm from './AuthForm' 
+// What is this, how is it different from Login/SignUp?
 
 
 class App extends Component {

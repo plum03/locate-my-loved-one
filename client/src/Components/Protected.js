@@ -14,7 +14,7 @@ class ProtectedPath extends Component {
         // if(isAuthenticated) {     return this.props.children }  else {     return
         // null } function mapStateToProps(state, ownProps) {     console.log(state)
         // console.log(this.state)     return {         isAuthenticated:
-        // state.player.isAuthenticated,         currentURL: ownProps.location.pathname
+        // state.user.isAuthenticated,         currentURL: ownProps.location.pathname
         //    } }
         return (
             isAuthenticated
