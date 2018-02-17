@@ -1,5 +1,3 @@
 Test edit
 
-erica is a conflict
-
-ERROR ERROR ERROR DOES NOT COMPUTE!!! BLARGG **EXPLOSIONS**
+test conflict i tihnk im doing this right. but who the hell knows.
