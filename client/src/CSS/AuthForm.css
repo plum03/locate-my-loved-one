@@ -1,0 +1,25 @@
+.auth-form-wrapper {
+    padding: 50px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    margin: auto;
+}
+
+.auth-form > * {
+    margin: 10px;
+    padding: 3px;
+}
+
+.authform-comment {
+    resize: none;
+}
+
+.auth-submit {
+    width: 100px;
+    margin: auto;
+}

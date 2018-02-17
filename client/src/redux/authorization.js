@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 axios
     .interceptors
@@ -17,7 +17,10 @@ export function signup(user) {
         axios
             .post("/auth/signup", user)
             .then(response => {
-                dispatch({type: "SIGNUP", user: response.data})
+                dispatch({ type: "SIGNUP", user: response.data })
+            })
+            .catch(err => {
+                console.error(err);
             })
     }
 }
@@ -29,10 +32,11 @@ export function login(user, success) {
             .then(response => {
                 let { token, success, user } = response.data
                 localStorage.setItem("token", token)
-                dispatch({type: "LOGIN", 
-                user,
-                success
-            })
+                dispatch({
+                    type: "LOGIN",
+                    user,
+                    success
+                })
             })
     }
 }
@@ -40,21 +44,21 @@ export function login(user, success) {
 export function logout(history) {
     localStorage.removeItem("token");
     // history.push("/");
-    return {type: "LOGOUT"}
+    return { type: "LOGOUT" }
 }
 
 
-export function verifyUser () {
+export function verifyUser() {
     return (dispatch) => {
         axios.get("/user/verify")
-        .then((response) => {
-            let {success, user } = response.data
-            dispatch(login(user, success))
-        })
-        .catch ((err) => {
-            console.error(err)
-        })
-    } 
+            .then((response) => {
+                let { success, user } = response.data
+                dispatch(login(user, success))
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+    }
 }
 
 export default function authReducer(user = {
@@ -62,7 +66,7 @@ export default function authReducer(user = {
     data: {},
     isAuthenticated: false
 }, action) {
-    switch (action.type) {
+    switch (action) {
         case "LOGIN":
             return {
                 data: {
@@ -78,7 +82,7 @@ export default function authReducer(user = {
                 data: {},
                 isAuthenticated: false
             }
-            
+
         default:
             return user
     }
