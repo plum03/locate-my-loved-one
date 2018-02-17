@@ -1,21 +1,24 @@
 import React, { Component } from 'react'
 
+import '../CSS/AuthForm.css'
+
 class AuthForm extends Component {
     constructor(props) {
         super(props);
         let { firstName, lastName, city, state, email, password, comment } = this.props;
-        this.state = ({
+        this.state = {
             inputs: {
                 firstName: firstName || '',
                 lastName: lastName || '',
                 city: city || '',
-                state: state || '',
+                state: state || 'AL',
                 email: email || '',
                 password: password || '',
                 comment: comment || ''
             }
-        })
+        }
     }
+
     handleChange = (e) => {
         let { name, value } = e.target
         if (name === "state") {
@@ -40,15 +43,32 @@ class AuthForm extends Component {
 
     }
 
+    clearInputs = () => {
+        this.setState({
+            inputs: {
+                firstName: '',
+                lastName: '',
+                city: '',
+                state: '',
+                email: '',
+                password: '',
+                comment: ''
+            }
+        })
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
+        this.props.submit(this.state.inputs);
+        this.clearInputs();
     }
 
     render() {
-        let { firstName, lastName, city, state, email, password, comment } = this.state;
+        let { firstName, lastName, city, state, email, password, comment } = this.state.inputs;
+        console.log(this.state.inputs);
         return (
-            <div>
-                <form action="" onSubmit={this.handleSubmit}>
+            <div className="auth-form-wrapper">
+                <form action="" className="auth-form" onSubmit={this.handleSubmit}>
                     <input onChange={this.handleChange} type="text" name="firstName" value={firstName} placeholder="First Name" />
                     <input onChange={this.handleChange} type="text" name="lastName" value={lastName} placeholder="Last Name" />
                     <input onChange={this.handleChange} type="text" name="city" value={city} placeholder="Hometown" />
@@ -113,8 +133,8 @@ class AuthForm extends Component {
                     </select>
                     <input onChange={this.handleChange} type="text" name="email" value={email} placeholder="Email Address" />
                     <input onChange={this.handleChange} type="password" name="password" value={password} placeholder="Password" />
-                    <textarea name="comment" value={comment} id="" cols="30" rows="10"></textarea>
-                    <button type="submit">submit</button>
+                    <textarea onChange={this.handleChange} className="authform-comment" name="comment" value={comment} id="" cols="30" rows="10" placeholder=""></textarea>
+                    <button className="auth-submit" type="submit">submit</button>
                 </form>
             </div>
         )

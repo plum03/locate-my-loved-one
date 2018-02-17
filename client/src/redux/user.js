@@ -28,3 +28,10 @@ export function verifyUser () {
 
 
 // User REDUCER go here
+
+export default function user (user={}, action) {
+    switch(action) {
+        default:
+            return user
+    }
+}
