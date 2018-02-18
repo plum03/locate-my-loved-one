@@ -17,6 +17,7 @@ authRoutes.post("/signup", (req, res) => {
 })
 
 authRoutes.post("/login", (req, res) => {
+    console.log('You have called the login function!')
     User.findOne({email: req.body.email}, (err, user) => {
         if (err) return res.status(500).send(err)
         if(!user) {

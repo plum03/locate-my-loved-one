@@ -23,5 +23,5 @@ mongoose.connect('mongodb://localhost:27017/locate', () => {
 })
 
 app.listen(config.port, () => {
-    console.log("Listening on port " +config.port)
+    console.log("Listening on port " + config.port)
 })
