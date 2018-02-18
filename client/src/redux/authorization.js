@@ -9,15 +9,21 @@ axios
         return config
     })
 
-
-
-
-export function signup(user) {
+function authorize(user, success){
+    return {
+       type: "AUTHORIZE",
+       user,
+       success
+    }
+}   
+export function signup(user, history) {
     return dispatch => {
         axios
             .post("/auth/signup", user)
             .then(response => {
-                dispatch({ type: "SIGNUP", user: response.data })
+                let {user, success} = response.data;
+                dispatch(authorize(user, success));
+                history.push("/profile");
             })
             .catch(err => {
                 console.error(err);
@@ -25,18 +31,22 @@ export function signup(user) {
     }
 }
 
-export function login(user, success) {
+export function login(user, history) {
     return dispatch => {
         axios
             .post("/auth/login", user)
             .then(response => {
                 let { token, success, user } = response.data
-                localStorage.setItem("token", token)
+                localStorage.setItem("token", token);
                 dispatch({
                     type: "LOGIN",
                     user,
                     success
-                })
+                });
+                history.push("/profile");
+            })
+            .catch(err => {
+                console.error(err)
             })
     }
 }
@@ -53,7 +63,7 @@ export function verifyUser() {
         axios.get("/user/verify")
             .then((response) => {
                 let { success, user } = response.data
-                dispatch(login(user, success))
+                dispatch(authorize(user, success));
             })
             .catch((err) => {
                 console.error(err)
@@ -66,8 +76,8 @@ export default function authReducer(user = {
     data: {},
     isAuthenticated: false
 }, action) {
-    switch (action) {
-        case "LOGIN":
+    switch (action.type) {
+        case "AUTHORIZE":
             return {
                 data: {
                     ...action.user,
@@ -81,6 +91,15 @@ export default function authReducer(user = {
                 loading: false,
                 data: {},
                 isAuthenticated: false
+            }
+        case "SIGNUP":
+            return {
+                data: {
+                    ...action.user,
+                    token: action.token
+                },
+                loading: false,
+                isAuthenticated: action.success
             }
 
         default:
