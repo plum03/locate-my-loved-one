@@ -15,7 +15,7 @@ userRoute.route("/verify")
             } else if (user === null) {
                 res.status(400).send({success: false, err})
             } else {
-                res.status(200).send({success: true, user: user.deletePassword()})
+                res.status(200).send({success: true, user: user.removePassword()})
             }
         })
     })

@@ -3,11 +3,10 @@ import thunk from 'redux-thunk'
 import auth from "./authorization";
 
 
-import user from './user'
+// import user from './user'
 
-// console.log(user);
 const rootReducer = combineReducers({ 
-    user,
+    // user,
     auth
 
  })

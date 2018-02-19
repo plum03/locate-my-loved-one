@@ -1,15 +1,15 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Route, Redirect} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Route, Redirect } from 'react-router-dom'
 
-class ProtectedPath extends Component {
+class Protected extends Component {
 
     render() {
 
-        const isAuthenticated = this.props.user.isAuthenticated
-        const Component = this.props.component.WrappedComponent
-        const path = this.props.path
-        console.log(isAuthenticated)
+        const { isAuthenticated } = this.props.auth
+        const Component = this.props.component;
+        const path = this.props.path;
+        console.log(isAuthenticated);
 
         // if(isAuthenticated) {     return this.props.children }  else {     return
         // null } function mapStateToProps(state, ownProps) {     console.log(state)
@@ -18,13 +18,10 @@ class ProtectedPath extends Component {
         //    } }
         return (
             isAuthenticated
-            ? <Route
+                ? <Route
                     path={path}
-                    render={() => {
-                    return <Component {...this.props}/>
-                }}/>
-
-            : <Redirect to="/"/>
+                    component={Component} />
+                : <Redirect to="/" />
         )
     }
 }
@@ -33,4 +30,5 @@ const mapStateToProps = (state) => {
     return state
 }
 
-export default connect(mapStateToProps, {})(ProtectedPath)
+export default connect(mapStateToProps, {})(Protected);
+

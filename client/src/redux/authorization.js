@@ -1,27 +1,29 @@
 import axios from "axios"
-
-axios
+const userAxios = axios.create();
+userAxios
     .interceptors
     .request
     .use((config) => {
         const token = localStorage.getItem("token");
         config.headers.Authorization = `Bearer ${token}`;
         return config
-    })
+    });
 
-function authorize(user, success){
+function authorize(user, success) {
     return {
-       type: "AUTHORIZE",
-       user,
-       success
+        type: "AUTHORIZE",
+        user,
+        success
     }
-}   
+}
+
 export function signup(user, history) {
     return dispatch => {
         axios
             .post("/auth/signup", user)
             .then(response => {
-                let {user, success} = response.data;
+                let { user, success } = response.data;
+                console.log('success=', success)
                 dispatch(authorize(user, success));
                 history.push("/profile");
             })
@@ -37,12 +39,9 @@ export function login(user, history) {
             .post("/auth/login", user)
             .then(response => {
                 let { token, success, user } = response.data
+                console.log('success=', success)
                 localStorage.setItem("token", token);
-                dispatch({
-                    type: "LOGIN",
-                    user,
-                    success
-                });
+                dispatch(authorize(user, success));
                 history.push("/profile");
             })
             .catch(err => {
@@ -60,7 +59,7 @@ export function logout(history) {
 
 export function verifyUser() {
     return (dispatch) => {
-        axios.get("/user/verify")
+        userAxios.get("/user/verify")
             .then((response) => {
                 let { success, user } = response.data
                 dispatch(authorize(user, success));
@@ -72,7 +71,7 @@ export function verifyUser() {
 }
 
 export default function authReducer(user = {
-    loading: false,
+    loading: true,
     data: {},
     isAuthenticated: false
 }, action) {
@@ -92,16 +91,6 @@ export default function authReducer(user = {
                 data: {},
                 isAuthenticated: false
             }
-        case "SIGNUP":
-            return {
-                data: {
-                    ...action.user,
-                    token: action.token
-                },
-                loading: false,
-                isAuthenticated: action.success
-            }
-
         default:
             return user
     }

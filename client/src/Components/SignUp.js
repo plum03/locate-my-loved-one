@@ -6,7 +6,7 @@ import Authform from './AuthForm'
 
 class SignUp extends Component {
     signUpSubmit = (user) => {
-        this.props.signup(user)
+        this.props.signup(user, this.props.history)
     }
 
     render() {
