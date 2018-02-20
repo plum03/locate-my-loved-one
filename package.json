@@ -2,7 +2,7 @@
   "name": "locate-my-loved-one",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",

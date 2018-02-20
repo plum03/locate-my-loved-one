@@ -4,6 +4,16 @@ const expressJwt = require("express-jwt");
 
 const User = require('../models/user')
 
+userRoute.route("/")
+    .get((req, res) => {
+        User.find({}, (err, user) => {
+            if (err) {
+                res.status(500).send({success: false, err})
+            } else {
+                res.status(200).send({success: true, user})
+            }
+        })
+    })
 
 userRoute.use(expressJwt({secret: process.env.SECRET}))
 
@@ -21,7 +31,7 @@ userRoute.route("/verify")
     })
 
 
-userRoute.route("/")
+userRoute.route("/profile")
 .get((req, res) => {
     User.findById(req.user._id, (err, user) => {
         if (err) return res.status(500).send(err);
@@ -30,7 +40,7 @@ userRoute.route("/")
 })
 
 
-userRoute.put("/", (req, res) => {
+userRoute.put("/profile", (req, res) => {
     User.findByIdAndUpdate(req.user._id, req.body, {
         new: true
     }, (err, updatedUser) => {
@@ -41,7 +51,7 @@ userRoute.put("/", (req, res) => {
 });
 
 
-userRoute.delete("/", (req, res) => {
+userRoute.delete("/profile", (req, res) => {
     User.findByIdAndRemove(req.user._id, (err, deletedUser) => {
         if (err) 
             return res.status(500).send(err)
