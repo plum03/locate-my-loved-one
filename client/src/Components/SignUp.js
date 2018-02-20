@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { signup } from '../redux/authorization'
-import Authform from './AuthForm'
+import InfoForm from './InfoForm'
 
 class SignUp extends Component {
     signUpSubmit = (user) => {
@@ -12,7 +12,7 @@ class SignUp extends Component {
     render() {
         return (
             <div>
-                <Authform submit={this.signUpSubmit} />
+                <InfoForm submit={this.signUpSubmit} />
             </div>
         )
     }

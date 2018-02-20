@@ -1,11 +1,26 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
+import { verifyUser } from '../redux/authorization'
 
-export default class Profile extends Component {
+import InfoForm from '../Components/InfoForm'
+
+class Profile extends Component {
+    // componentDidMount(){
+    //     this.props.verifyUser();
+    // }
+
     render() {
         return (
             <div>
-                this is the profile page
+                <InfoForm />
             </div>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return state
+}
+
+export default withRouter(connect(mapStateToProps, { verifyUser })(Profile))

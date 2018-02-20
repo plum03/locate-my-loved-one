@@ -11,13 +11,12 @@ import Profile from './Profile'
 import Search from './Search'
 import Login from './Login'
 import SignUp from './SignUp'
-import Protected from './Protected' 
+import Protected from './Protected'
 
 
 class App extends Component {
 
     componentDidMount() {
-        console.log('app props=', this.props);
         this.props.verifyUser();
     }
 
@@ -26,29 +25,30 @@ class App extends Component {
         let style = { backgroundColor: 'white' }
 
         return (
-            loading ? 
-                <div>
-                    <Navbar />
-                </div>
-                :
-                <div className='app-wrapper' style={style}>
-                    <Navbar />
-                    <Switch>
-                        <Route exact path ="/" component={Search} />
+            <div className='app-wrapper' style={style}>
+                {loading ?
+                    <p>LOADING...</p>
+                    :
+                    <div>
+                        <Navbar />
+                        <Switch>
+                            <Route exact path="/" component={Search} />
 
-                        <Route path="/login" render={(props) => {
-                            return isAuthenticated ?
-                            <Redirect to="/profile" />
-                            :
-                            <Login {...props} />
-                        }} />
+                            <Route path="/login" render={(props) => {
+                                return isAuthenticated ?
+                                    <Redirect to="/profile" />
+                                    :
+                                    <Login {...props} />
+                            }} />
 
-                        <Protected path="/profile" component={Profile} />
+                            <Protected path="/profile" component={Profile} />
 
-                        <Route path='/signup' component={SignUp} />
-                        <Route path='/login' component={Login} />
-                    </Switch>
-                </div>
+                            <Route path='/signup' component={SignUp} />
+                            <Route path='/login' component={Login} />
+                        </Switch>
+                    </div>
+                }
+            </div>
         )
     }
 }

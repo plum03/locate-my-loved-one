@@ -65,6 +65,7 @@ export function verifyUser() {
             })
             .catch((err) => {
                 console.error(err)
+                dispatch(authorize({}, false));
             })
     }
 }
