@@ -2,14 +2,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import auth from "./authorization";
 
-
-// import user from './user'
-
-const rootReducer = combineReducers({ 
-    // user,
-    auth
-
- })
+const rootReducer = combineReducers({ auth })
 
 
 export default createStore(

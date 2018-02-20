@@ -23,7 +23,6 @@ export function signup(user, history) {
             .post("/auth/signup", user)
             .then(response => {
                 let { user, success } = response.data;
-                console.log('success=', success)
                 dispatch(authorize(user, success));
                 history.push("/profile");
             })
