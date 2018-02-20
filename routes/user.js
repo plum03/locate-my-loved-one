@@ -59,4 +59,4 @@ userRoute.delete("/profile", (req, res) => {
     })
 })
 
-module.exports = userRoute
+module.exports = userRoute;
