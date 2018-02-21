@@ -40,7 +40,7 @@ userRoute.route("/profile")
 })
 
 
-userRoute.put("/profile", (req, res) => {
+userRoute.put("/edit", (req, res) => {
     User.findByIdAndUpdate(req.user._id, req.body, {
         new: true
     }, (err, updatedUser) => {
@@ -51,7 +51,7 @@ userRoute.put("/profile", (req, res) => {
 });
 
 
-userRoute.delete("/profile", (req, res) => {
+userRoute.delete("/delete", (req, res) => {
     User.findByIdAndRemove(req.user._id, (err, deletedUser) => {
         if (err) 
             return res.status(500).send(err)

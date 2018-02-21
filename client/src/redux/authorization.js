@@ -37,6 +37,7 @@ export function login(user, history) {
         axios
             .post("/auth/login", user)
             .then(response => {
+                console.log(response.data)
                 let { token, success, user } = response.data
                 console.log('success=', success)
                 localStorage.setItem("token", token);
@@ -55,6 +56,26 @@ export function logout(history) {
     return { type: "LOGOUT" }
 }
 
+export function editUser(editedUser, id) {
+    return (dispatch) => {
+        userAxios.put("/user/edit", editedUser)
+            .then((response) => {
+                console.log(response.data)
+                // let {editedUser, success, id} = response.data
+                // dispatch(authorize(user, success))
+                dispatch({
+                    type: "EDIT_USER",
+                    editedUser: response.data,
+                    id
+                })
+            })
+            .catch((err) => {
+                console.error(err)
+                dispatch(authorize({}, false))
+            })
+    }
+}
+
 
 export function verifyUser() {
     return (dispatch) => {
@@ -70,6 +91,23 @@ export function verifyUser() {
     }
 }
 
+
+export function deleteUser(id) {
+    return (dispatch) => {
+        userAxios
+        .delete("user/delete")
+        .then((response) => {
+            dispatch({
+                type: "DELETE_ISSUE",
+                id
+            })
+        })
+        .catch((err) => {
+            console.error(err)
+        })
+    }
+}
+
 export default function authReducer(user = {
     loading: true,
     data: {},
@@ -79,8 +117,8 @@ export default function authReducer(user = {
         case "AUTHORIZE":
             return {
                 data: {
-                    ...action.user,
-                    token: action.token
+                    ...action.user
+                    
                 },
                 loading: false,
                 isAuthenticated: action.success
@@ -90,6 +128,26 @@ export default function authReducer(user = {
                 loading: false,
                 data: {},
                 isAuthenticated: false
+            }
+            case "EDIT_USER":
+            console.log(user)
+            return {
+                data: user.data.map((user) => {
+                    if (user._id === action.id) {
+                        return action.editedUser
+                    } else {
+                        return user
+                    }
+                }),
+                loading: false
+            }
+
+        case "DELETE_USER":
+            return {
+                data: user.data.filter((user) => {
+                    return user._id !== action.id
+                }),
+                loading: false
             }
         default:
             return user
