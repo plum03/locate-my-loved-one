@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-export default class Search extends Component {
+import { getUsers } from '../redux/search'
+import SearchResult from './SearchResult'
+
+import '../CSS/Search.css'
+
+class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -9,14 +15,12 @@ export default class Search extends Component {
                 lastName: '',
                 state: 'AL'
             },
-            filteredResults: []
+            filteredResults: [{msg: 'Type a name and select a state to locate a loved one'}]
         }
     }
 
-    componentDidMount(){
-        //get request for an array of users
-        //this means we need an array of users
-        //on signUp, add user to array of users
+    componentDidMount() {
+        this.props.getUsers();
     }
 
     handleChange = (e) => {
@@ -32,8 +36,26 @@ export default class Search extends Component {
     }
 
     handleSubmit = (e) => {
-        e.preventDefault();
-        this.clearInputs();
+        e.preventDefault()
+        let { firstName, lastName, state } = this.state.searchInputs
+        let users = this.props.search.data
+        let filteredResults = users.filter(user => {
+            if (firstName && lastName && state) {
+                return (user.firstName === firstName && user.lastName === lastName && user.state === state)
+            } else {
+                return (user.firstName === firstName || user.lastName === lastName || user.state === state)
+            }
+        })
+        if(filteredResults.length > 0) {
+            this.setState({
+                filteredResults: filteredResults
+            })
+        } else {
+            this.setState({
+                filteredResults: [{msg: 'Sorry, no results found'}]
+            })
+        }
+        this.clearInputs()
     }
 
     clearInputs = () => {
@@ -47,11 +69,12 @@ export default class Search extends Component {
     }
 
     render() {
-        console.log('state', this.state.searchInputs)
-        let { firstName, lastName, state, email } = this.state.searchInputs
+        let { firstName, lastName, state } = this.state.searchInputs
+        let { filteredResults } = this.state
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <h2 className="search-title">Locate My Loved One</h2>
+                <form onSubmit={this.handleSubmit} className="search-form">
                     <select onChange={this.handleChange} name="state" value={state} placeholder="Home State">
                         <option value="AL">Alabama (AL)</option>
                         <option value="AK">Alaska (AK)</option>
@@ -113,13 +136,22 @@ export default class Search extends Component {
                     </select>
                     <input onChange={this.handleChange} type="text" name="firstName" value={firstName} placeholder="First Name" />
                     <input onChange={this.handleChange} type="text" name="lastName" value={lastName} placeholder="Last Name" />
-                    <button type="submit">submit</button>
+                    <button type="submit" className="search-submit">submit</button>
                 </form>
-                <div>
-                    search data will appear here
-                    this will be data from a filtered array of users that match search inputs
+                <div className="search-results">
+                    {filteredResults.map((result, index) => {
+                            return <SearchResult key={index} {...result}>{result.firstName}</SearchResult>
+                    })}
                 </div>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        search: state.searchResults
+    }
+}
+
+export default connect(mapStateToProps, { getUsers })(Search);

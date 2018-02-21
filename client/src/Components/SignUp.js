@@ -18,10 +18,4 @@ class SignUp extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        user: state.user
-    }
-}
-
-export default connect(mapStateToProps, { signup })(SignUp);
+export default connect(null, { signup })(SignUp);

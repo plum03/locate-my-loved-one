@@ -1,8 +1,9 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
-import auth from "./authorization";
+import auth from "./authorization"
+import searchResults from "./search"
 
-const rootReducer = combineReducers({ auth })
+const rootReducer = combineReducers({ auth, searchResults })
 
 
 export default createStore(
