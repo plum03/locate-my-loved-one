@@ -22,9 +22,10 @@ export function signup(user, history) {
         axios
             .post("/auth/signup", user)
             .then(response => {
-                let { user, success } = response.data;
-                dispatch(authorize(user, success));
-                history.push("/profile");
+                let { newUser, success, token } = response.data;
+                localStorage.setItem("token", token);
+                dispatch(authorize(newUser, success));
+                // history.push("/login");
             })
             .catch(err => {
                 console.error(err);
@@ -92,14 +93,15 @@ export function verifyUser() {
 }
 
 
-export function deleteUser(id) {
+export function deleteUser() {
+    
     return (dispatch) => {
         userAxios
         .delete("user/delete")
         .then((response) => {
+            localStorage.removeItem("token");
             dispatch({
-                type: "DELETE_ISSUE",
-                id
+                type: "DELETE_USER"
             })
         })
         .catch((err) => {
@@ -132,22 +134,17 @@ export default function authReducer(user = {
             case "EDIT_USER":
             console.log(user)
             return {
-                data: user.data.map((user) => {
-                    if (user._id === action.id) {
-                        return action.editedUser
-                    } else {
-                        return user
-                    }
-                }),
-                loading: false
+                data: action.editedUser,
+                loading: false,
+                isAuthenticated: true
+                
             }
 
         case "DELETE_USER":
             return {
-                data: user.data.filter((user) => {
-                    return user._id !== action.id
-                }),
-                loading: false
+                data: {},
+                loading: false,
+                isAuthenticated: false
             }
         default:
             return user

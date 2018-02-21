@@ -28,12 +28,7 @@ class Profile extends Component {
     let userID = this.props.userState.auth.data._id
        console.log(user)
         this.props.editUser(user, userID)
-   }
-
-   deleteUser = () => {
-    console.log(this.props.userState.auth.data._id)
-    let userID = this.props.userState.auth.data._id
-       this.props.deleteUser(userID)
+        this.toggleEdit()
    }
 
     render() {
@@ -53,7 +48,7 @@ class Profile extends Component {
             return (
                 <div>
                     <button onClick={this.toggleEdit} >Edit Profile</button>
-                    <button onClick={this.deleteUser}>Delete Account</button>
+                    <button onClick={this.props.deleteUser}>Delete Account</button>
                     <h1>Hello {firstName} {lastName}</h1>
                     <p>Your current status: {comment}</p>
                 </div>
