@@ -5,13 +5,10 @@ import {Link} from "react-router-dom"
 
 import '../CSS/Navbar.css';
 
-//Links are still not reflecting whether user is logged in or out - only showing signup/login links
-
 class Nav extends Component {
    
     render() {
         const isAuthenticated = this.props.auth.isAuthenticated
-        console.log('navbar props', this.props)
         return (
             <div className="nav-wrapper" >
                 <Link className="nav-links" to="/">Home</Link>

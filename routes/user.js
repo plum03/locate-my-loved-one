@@ -6,11 +6,11 @@ const User = require('../models/user')
 
 userRoute.route("/")
     .get((req, res) => {
-        User.find({}, (err, user) => {
+        User.find({}, (err, users) => {
             if (err) {
                 res.status(500).send({success: false, err})
             } else {
-                res.status(200).send({success: true, user})
+                res.status(200).send({success: true, users})
             }
         })
     })

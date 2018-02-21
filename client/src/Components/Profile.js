@@ -6,6 +6,7 @@ import { verifyUser, editUser, deleteUser } from '../redux/authorization'
 import InfoForm from '../Components/InfoForm'
 
 class Profile extends Component {
+
     constructor(props) {
         super(props)
         this.state = {

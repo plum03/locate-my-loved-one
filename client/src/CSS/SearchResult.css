@@ -1,0 +1,7 @@
+.display-result {
+    padding: 20px
+}
+
+.display-result > * {
+    margin: 5px;
+}
