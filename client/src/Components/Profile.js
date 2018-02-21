@@ -6,9 +6,6 @@ import { verifyUser } from '../redux/authorization'
 import InfoForm from '../Components/InfoForm'
 
 class Profile extends Component {
-    // componentDidMount(){
-    //     this.props.verifyUser();
-    // }
 
     render() {
         return (
