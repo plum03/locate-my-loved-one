@@ -25,7 +25,7 @@ export function signup(user, history) {
                 let { newUser, success, token } = response.data;
                 localStorage.setItem("token", token);
                 dispatch(authorize(newUser, success));
-                // history.push("/login");
+                history.push("/profile");
             })
             .catch(err => {
                 console.error(err);
@@ -38,9 +38,7 @@ export function login(user, history) {
         axios
             .post("/auth/login", user)
             .then(response => {
-                console.log(response.data)
                 let { token, success, user } = response.data
-                console.log('success=', success)
                 localStorage.setItem("token", token);
                 dispatch(authorize(user, success));
                 history.push("/profile");
@@ -61,9 +59,6 @@ export function editUser(editedUser, id) {
     return (dispatch) => {
         userAxios.put("/user/edit", editedUser)
             .then((response) => {
-                console.log(response.data)
-                // let {editedUser, success, id} = response.data
-                // dispatch(authorize(user, success))
                 dispatch({
                     type: "EDIT_USER",
                     editedUser: response.data,
@@ -92,9 +87,7 @@ export function verifyUser() {
     }
 }
 
-
 export function deleteUser() {
-    
     return (dispatch) => {
         userAxios
         .delete("user/delete")
@@ -131,15 +124,12 @@ export default function authReducer(user = {
                 data: {},
                 isAuthenticated: false
             }
-            case "EDIT_USER":
-            console.log(user)
+        case "EDIT_USER":
             return {
                 data: action.editedUser,
                 loading: false,
                 isAuthenticated: true
-                
             }
-
         case "DELETE_USER":
             return {
                 data: {},

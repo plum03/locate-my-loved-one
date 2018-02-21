@@ -1,6 +1,5 @@
-Test edit
+# Locate My Loved One
 
-test conflict i tihnk im doing this right. but who the hell knows.
+## Objective
 
-I WANT SO DESPERATELY TO BE APPRECIATED!!!!!
-PAY ATTENTION TO ME!!! WHYYYYYYY
+Provide a platform for people affected by natural disasters and other calamaties to report that they are safe and well, and to allow their loved ones to search by name to locate them.

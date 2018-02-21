@@ -7,7 +7,6 @@ import '../CSS/AuthForm.css'
 class InfoForm extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
         let { firstName, lastName, city, state, email, password, comment } = props;
         this.state = {
             inputs: {
@@ -68,13 +67,12 @@ class InfoForm extends Component {
 
     render() {
         let { firstName, lastName, city, state, email, password, comment } = this.state.inputs;
-        console.log(this.state.inputs);
         return (
             <div className="auth-form-wrapper">
                 <form action="" className="auth-form" onSubmit={this.handleSubmit}>
                     <input onChange={this.handleChange} type="text" name="firstName" value={firstName} placeholder="First Name" />
                     <input onChange={this.handleChange} type="text" name="lastName" value={lastName} placeholder="Last Name" />
-                    <input onChange={this.handleChange} type="text" name="city" value={city} placeholder="Hometown" />
+                    <input onChange={this.handleChange} type="text" name="city" value={city} placeholder="City" />
                     <select onChange={this.handleChange} name="state" value={state} placeholder="Home State">
                         <option value="AL">Alabama (AL)</option>
                         <option value="AK">Alaska (AK)</option>
