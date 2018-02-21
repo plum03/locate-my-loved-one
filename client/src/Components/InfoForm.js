@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 
+import {editUser} from '../redux/authorization'
+
 import '../CSS/AuthForm.css'
 
 class InfoForm extends Component {
     constructor(props) {
         super(props);
-        let { firstName, lastName, city, state, email, password, comment } = this.props;
+        console.log(props)
+        let { firstName, lastName, city, state, email, password, comment } = props;
         this.state = {
             inputs: {
                 firstName: firstName || '',

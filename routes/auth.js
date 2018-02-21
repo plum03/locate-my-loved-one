@@ -11,7 +11,7 @@ authRoutes.post("/signup", (req, res) => {
             newUser.save(err => {
                 if (err) return res.status(500).send({success: false, err})
                 const token = jwt.sign(newUser.removePassword(), process.env.SECRET)
-                return res.status(201).send({success: true, newUser})
+                return res.status(201).send({success: true, newUser, token})
             })
     })
 })
