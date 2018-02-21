@@ -15,7 +15,7 @@ class Search extends Component {
                 lastName: '',
                 state: 'AL'
             },
-            filteredResults: [{msg: 'Type a name and select a state to locate a loved one'}]
+            filteredResults: [{msg: 'Type a name and select a state above to locate a loved one.'}]
         }
     }
 
