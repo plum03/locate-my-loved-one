@@ -7,7 +7,6 @@ import { verifyUser } from '../redux/authorization'
 // Components import
 import Navbar from './Navbar'
 import Profile from './Profile'
-// import InfoForm from './InfoForm'
 import Search from './Search'
 import Login from './Login'
 import SignUp from './SignUp'

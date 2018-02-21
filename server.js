@@ -14,7 +14,6 @@ const app = express()
 app.use(bodyParser.json())
 
 // routes
-// app.use("/api", expressJwt({secret: process.env.SECRET}))
 app.use("/auth", authRoute)
 app.use("/user", userRoute)
 

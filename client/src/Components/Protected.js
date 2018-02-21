@@ -9,13 +9,6 @@ class Protected extends Component {
         const { isAuthenticated } = this.props.auth
         const Component = this.props.component;
         const path = this.props.path;
-        console.log(isAuthenticated);
-
-        // if(isAuthenticated) {     return this.props.children }  else {     return
-        // null } function mapStateToProps(state, ownProps) {     console.log(state)
-        // console.log(this.state)     return {         isAuthenticated:
-        // state.user.isAuthenticated,         currentURL: ownProps.location.pathname
-        //    } }
         return (
             isAuthenticated
                 ? <Route

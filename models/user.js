@@ -25,7 +25,6 @@ lastName: {
 },
 city: {
     type: String
-    // required: true
 },
 state: {
     type: String,
