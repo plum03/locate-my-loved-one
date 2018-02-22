@@ -12,6 +12,8 @@ import Login from './Login'
 import SignUp from './SignUp'
 import Protected from './Protected'
 
+import '../CSS/App.css'
+
 
 class App extends Component {
 

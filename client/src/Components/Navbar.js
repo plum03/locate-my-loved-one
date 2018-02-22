@@ -16,7 +16,7 @@ class Nav extends Component {
                     {isAuthenticated ? null : <div><Link className="nav-links" to="/signup">Sign Up</Link></div>}
                     {isAuthenticated ? null : <div><Link className="nav-links" to="/login">Log In</Link></div>}
                     {isAuthenticated ? <div><Link className="nav-links" to="/profile">Profile</Link></div> : null}
-                    {isAuthenticated ? <div><button onClick={this.props.logout}>Log Out</button></div> : null}
+                    {isAuthenticated ? <div><button onClick={this.props.logout} className="logout">Log Out</button></div> : null}
                 </div>
             </div>
         )
