@@ -5,6 +5,8 @@ import { verifyUser, editUser, deleteUser } from '../redux/authorization'
 
 import InfoForm from '../Components/InfoForm'
 
+import '../CSS/Profile.css'
+
 class Profile extends Component {
     constructor(props) {
         super(props)
@@ -24,25 +26,26 @@ class Profile extends Component {
         this.props.editUser(user, userID)
         this.toggleEdit()
     }
-
+gu
     render() {
         let props = this.props.userState.auth.data
         let { firstName, lastName, comment } = props
         if(this.state.isEditing) {
             return (
-                <div>
-                    <InfoForm {...props} submit={this.editProfile} option={{toggle: this.toggleEdit}}/>
-                    <button onClick={this.toggleEdit}>Return to Profile</button>
+                <div className="profile-wrapper">
+                    <h2 className="edit-profile-h2">Edit Profile</h2>
+                    <button className="return-to-profile" onClick={this.toggleEdit}>Return to Profile</button>
+                    <InfoForm edit {...props} submit={this.editProfile} option={{toggle: this.toggleEdit}}/>
                 </div>
             )
         }
         if(!this.state.isEditing) {
             return (
-                <div>
-                    <button onClick={this.toggleEdit} >Edit Profile</button>
-                    <button onClick={this.props.deleteUser}>Delete Account</button>
-                    <h1>Hello {firstName} {lastName}</h1>
-                    <p>Your current status: {comment}</p>
+                <div className="profile-wrapper">
+                    <button className="profile-btn" onClick={this.toggleEdit} >Edit Profile</button>
+                    <button className="profile-btn" onClick={this.props.deleteUser}>Delete Account</button>
+                    <h1 className="hello">Hello, {firstName} {lastName}</h1>
+                    <p className="status">Your current status: {comment}</p>
                 </div>
             )
         }

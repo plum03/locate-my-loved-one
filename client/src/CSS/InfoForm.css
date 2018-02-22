@@ -1,0 +1,47 @@
+.auth-form-wrapper {
+    padding: 30px;
+    width: 100%;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 350px;
+    margin: auto;
+}
+
+@media(max-width: 450px) {
+    .auth-form {
+        width: 300px;
+    }
+}
+
+.auth-form > * {
+    margin: 10px;
+    padding: 5px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    background-color: rgb(240, 240, 240);
+}
+
+.authform-comment {
+    resize: none;
+}
+
+.auth-submit {
+    width: 100px;
+    margin: auto;
+    margin-top: 15px;
+    background-color: #1985A1;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    color: white;
+    font-size: 15px;
+}
+
+.edit-profile-h2 {
+    text-align: center;
+}

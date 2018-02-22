@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import {editUser} from '../redux/authorization'
 
-import '../CSS/AuthForm.css'
+import '../CSS/InfoForm.css'
 
 class InfoForm extends Component {
     constructor(props) {

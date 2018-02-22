@@ -1,0 +1,39 @@
+.profile-wrapper {
+    width: 100%;
+    padding: 5%;
+}
+
+.profile-btn {
+    margin: 0 10px;
+    float: right;
+    background-color: #1985A1;
+    border: none;
+    border-radius: 5px;
+    height: 25px;
+    color: white;
+    font-size: 15px;
+}
+
+.hello {
+    margin-top: 50px;
+}
+
+.status {
+    padding: 25px 0px;
+}
+
+.edit-profile-h2 {
+    color: #1985A1;
+    margin-bottom: 10px;
+}
+
+.return-to-profile {
+    background-color: #C5C3C6;
+    border: none;
+    border-radius: 5px;
+    height: 25px;
+    color: white;
+    font-size: 15px;
+    display: block;
+    margin: 0 auto;
+}
